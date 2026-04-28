@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg: #07110f;
+  --bg-soft: #0c1714;
+  --panel: rgba(12, 23, 20, 0.82);
+  --line: rgba(110, 171, 148, 0.16);
+  --mint: #7de2b1;
+  --teal: #3fbf9d;
+  --cyan: #7dd3c7;
+  --text: #e6fff6;
+  --muted: #96b8ac;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(63,191,157,0.16), transparent 28%),
+    radial-gradient(circle at 80% 20%, rgba(125,211,199,0.09), transparent 25%),
+    linear-gradient(180deg, #07110f 0%, #08100f 35%, #060a09 100%);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(125, 226, 177, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 226, 177, 0.06) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, black 35%, transparent 100%);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.5) 0 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #08100f; }
+::-webkit-scrollbar-thumb { background: #204438; border-radius: 999px; }
+
+.hud-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 20px 80px rgba(0,0,0,0.28);
+  backdrop-filter: blur(14px);
+}
+
+.hud-title {
+  background: linear-gradient(135deg, #e6fff6 0%, #9ef5cb 40%, #55d4b4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hud-outline {
+  position: relative;
+}
+
+.hud-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(125,226,177,0.16);
+  clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
+  pointer-events: none;
+}
+
+.metric-ring {
+  background: conic-gradient(from 210deg, rgba(125,226,177,0.95), rgba(63,191,157,0.35), rgba(125,211,199,0.95));
+}
+
+.hex-grid {
+  background-image:
+    linear-gradient(30deg, rgba(125,226,177,0.08) 12%, transparent 12.5%, transparent 87%, rgba(125,226,177,0.08) 87.5%, rgba(125,226,177,0.08)),
+    linear-gradient(150deg, rgba(125,226,177,0.08) 12%, transparent 12.5%, transparent 87%, rgba(125,226,177,0.08) 87.5%, rgba(125,226,177,0.08)),
+    linear-gradient(90deg, rgba(125,226,177,0.05) 2%, transparent 2.5%, transparent 97%, rgba(125,226,177,0.05) 97.5%, rgba(125,226,177,0.05));
+  background-size: 42px 72px;
+  background-position: 0 0, 0 0, 21px 36px;
+}
+
+.scan-line {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.scan-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -20%;
+  height: 22%;
+  background: linear-gradient(180deg, transparent, rgba(125,226,177,0.14), transparent);
+  animation: scan 5s linear infinite;
+}
+
+@keyframes scan {
+  from { transform: translateY(0); }
+  to { transform: translateY(560%); }
+}
